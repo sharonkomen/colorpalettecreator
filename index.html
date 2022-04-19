@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Color Palette Creator</title>
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <script src="https://unpkg.com/vue@3"></script>
+  </head>
+  <body>
+    <div id="app">
+        <h1>Create a new color palette</h1>
+
+        <div class="color-one">
+            <div :style="{ backgroundColor: hex }" class="color-display" v-show="hex !== null">
+                <p v-show="showColorLabel">{{ hex }}</p>
+            </div>
+            <div v-show="!showColorLabel">
+                <p >Click the 'Generate Color' button until you have found something nice.</p>
+                <button @click="generateColor">Generate Color</button>
+            </div>
+            <div v-show="!showColorLabel && hex !== null">
+                <p>Then click 'Save First Color' and on to the next one!</p>
+                <button @click="saveColorOne">Save First Color</button>
+            </div>
+        </div>
+
+        <div class="color-two" v-show="showColorLabel">
+            <div :style="{ backgroundColor: hex2 }" class="color-display" v-show="hex2 !== null">
+                <p v-show="showColorLabelTwo">{{ hex2 }}</p>
+            </div>
+            <div v-show="!showColorLabelTwo">
+                <p>Click the 'Generate Color' button to generate your secondary color</p>
+                <button @click="generateColorTwo">Generate Second Color</button>
+            </div>
+            <div v-show="!showColorLabelTwo && hex2 !== null">
+                <p>Then click 'Save Second Color' and use the hex values in your next project!</p>
+                <button @click="saveSecondColor">Save Second Color</button>
+            </div>
+        </div>
+
+        <div class="final-options" v-show="showColorLabelTwo">
+            <!--button @click="export">Copy to clipboard</button-->
+            <button @click="refresh">Start over</button>
+            <p>Copy the hex values below:</p>
+            <textarea>{{ hexCombi }}</textarea>
+        </div>
+
+        <div class="show-values" v-show="hexCombi">
+            <ul>
+                <li v-for="(hexCombi in hexCombis" :value="hexCombi">{{ hexCombi.hexCombi }}</li>
+            </ul>
+        </div>
+    </div>
+    <script src="./main.js"></script>
+    <script>
+        const mountedApp = app.mount('#app')
+    </script>
+  </body>
+</html>
